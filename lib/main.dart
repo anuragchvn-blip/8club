@@ -75,69 +75,90 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   final PageController _controller = PageController(viewportFraction: 0.8);
 
-   final List<Widget> children = [
-    Card1(),
-    Card1(),
-    Card1(),
-  ];
+   late List<Widget> children;
+
+   MyHomePage(){
+     children = [
+      card1((){
+        _controller.hasClients
+            ? _controller.nextPage(
+                duration: Duration(milliseconds: 200), curve: Curves.linear)
+            : {};
+      }),
+       card1((){
+         _controller.hasClients
+             ? _controller.nextPage(
+             duration: Duration(milliseconds: 200), curve: Curves.linear)
+             : {};
+       }),
+       card1((){
+         _controller.hasClients
+             ? _controller.nextPage(
+             duration: Duration(milliseconds: 200), curve: Curves.linear)
+             : {};
+       }),     ];
+   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(height: 100,),
-          Container(
-            height: MediaQuery.of(context).size.height*0.8, // Ca
-            color: Colors.black,// rd height
-            child: PageView.builder(
-              itemCount: 3,
-              controller: _controller,
-              itemBuilder: (context, index) {
-                return ListenableBuilder(
-                  listenable: _controller,
-                  builder: (context, child) {
-                    double factor = 1;
-                    if (_controller.position.hasContentDimensions) {
-                      factor = 1 - (_controller.page! - index).abs();
-                    }
+      body: Container(
+        color: Colors.black,
+        child: Column(
+          children: [
+            SizedBox(height: 100,),
+            Container(
+              height: MediaQuery.of(context).size.height*0.8, // Ca
+              color: Colors.black,// rd height
+              child: PageView.builder(
+                itemCount: 3,
+                controller: _controller,
+                itemBuilder: (context, index) {
+                  return ListenableBuilder(
+                    listenable: _controller,
+                    builder: (context, child) {
+                      double factor = 1;
+                      if (_controller.position.hasContentDimensions) {
+                        factor = 1 - (_controller.page! - index).abs();
+                      }
 
-                    return Center(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            gradient: RadialGradient(
-                                radius: 0.65,
-                                colors: [
-                                  Color(0xFFFE5BDB),
-                                  Colors.transparent,
-                                ],
-                                center: Alignment(0.1,0.1)
-                            )),
+                      return Center(
                         child: Container(
                           decoration: const BoxDecoration(
                               gradient: RadialGradient(
-                                radius: 0.5,
-                                colors: [
-                                  Color(0xFF5B62FF),
-                                  Colors.transparent,
-                                ],
-                                center: Alignment(-0.1,-0.1)
+                                  radius: 0.65,
+                                  colors: [
+                                    Color(0xFFFE5BDB),
+                                    Colors.transparent,
+                                  ],
+                                  center: Alignment(0.1,0.1)
                               )),
                           child: Container(
-                            height: MediaQuery.of(context).size.height*0.7 + (factor * (MediaQuery.of(context).size.height*0.1)),
-                            width: MediaQuery.of(context).size.width*0.8,
-                            color: const Color(0x0cFFFFFF),
-                            child: children[index]
+                            decoration: const BoxDecoration(
+                                gradient: RadialGradient(
+                                  radius: 0.5,
+                                  colors: [
+                                    Color(0xFF5B62FF),
+                                    Colors.transparent,
+                                  ],
+                                  center: Alignment(-0.1,-0.1)
+                                )),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height*0.7 + (factor * (MediaQuery.of(context).size.height*0.1)),
+                              width: MediaQuery.of(context).size.width*0.8,
+                              color: const Color(0x0cFFFFFF),
+                              child: children[index]
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              },
+                      );
+                    },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
