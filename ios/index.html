@@ -3,297 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Assignment 8Club">
-    <title>Assignment 8Club - iOS</title>
+    <title>iOS App</title>
     <link rel="stylesheet" href="ios-styles.css">
 </head>
 <body>
     <div class="ios-app">
+        <!-- iOS Status Bar -->
         <div class="status-bar">
             <div class="status-left">
                 <span class="time">9:41</span>
             </div>
             <div class="status-right">
-                <div class="battery-container">
-                    <div class="signal-bars">
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                    </div>
-                    <div class="wifi-icon">📶</div>
-                    <div class="battery">
-                        <div class="battery-level"></div>
-                    </div>
+                <div class="signal-bars">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <span class="wifi-icon">📶</span>
+                <div class="battery">
+                    <div class="battery-level"></div>
                 </div>
             </div>
         </div>
-        
+
+        <!-- App Content -->
         <div class="app-container">
             <div class="page-view-container">
-                <div class="card-container" id="iosCardContainer">
-                    <div class="card active" data-index="0">
-                        <div class="gradient-bg gradient-1">
-                            <div class="gradient-bg gradient-2">
-                                <div class="card-content">
-                                    <div class="card-header">
-                                        <h2>Type of Hotspot:</h2>
-                                    </div>
-                                    <div class="hotspot-grid">
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button class="next-button ios-button" onclick="nextCard()">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M8.91 19.92L15.43 13.4C16.2 12.63 16.2 11.37 15.43 10.6L8.91 4.08" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </button>
-                                    </div>
+                <div class="card-container">
+                    <!-- Card 1 -->
+                    <div class="card active" data-card="0">
+                        <div class="card-background card1-bg"></div>
+                        <div class="card-content">
+                            <div class="hotspot-grid">
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="card" data-index="1">
-                        <div class="gradient-bg gradient-1">
-                            <div class="gradient-bg gradient-2">
-                                <div class="card-content">
-                                    <div class="card-header">
-                                        <h2>Type of Hotspot:</h2>
-                                    </div>
-                                    <div class="hotspot-grid">
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button class="next-button ios-button" onclick="nextCard()">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M8.91 19.92L15.43 13.4C16.2 12.63 16.2 11.37 15.43 10.6L8.91 4.08" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </button>
-                                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="card" data-card="1">
+                        <div class="card-background card2-bg"></div>
+                        <div class="card-content">
+                            <div class="hotspot-grid">
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card" data-index="2">
-                        <div class="gradient-bg gradient-1">
-                            <div class="gradient-bg gradient-2">
-                                <div class="card-content">
-                                    <div class="card-header">
-                                        <h2>Type of Hotspot:</h2>
-                                    </div>
-                                    <div class="hotspot-grid">
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                        <div class="hotspot-item">
-                                            <div class="hotspot-icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M7 18h2V6H7v12zM12.5 18h2V6h-2v12zM18 18h2V6h-2v12z" fill="currentColor"/>
-                                                </svg>
-                                            </div>
-                                            <span>Brunch</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button class="next-button ios-button" onclick="nextCard()">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M8.91 19.92L15.43 13.4C16.2 12.63 16.2 11.37 15.43 10.6L8.91 4.08" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </button>
-                                    </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
+                                </div>
+                                <div class="hotspot-item">
+                                    <div class="hotspot-icon">📊</div>
+                                    <span class="hotspot-label">Brunch</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Navigation Arrow -->
+                <button class="nav-arrow" id="nextBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
         </div>
-        
+
+        <!-- iOS Home Indicator -->
         <div class="home-indicator"></div>
     </div>
+
     <script src="ios-script.js"></script>
 </body>
 </html>

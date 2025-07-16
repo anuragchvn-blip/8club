@@ -1,226 +1,131 @@
-let currentIndex = 0;
-const totalCards = 3;
-let startX = 0;
-let currentX = 0;
-let isDragging = false;
-let startTime = 0;
-
-function updateCards() {
-    const cards = document.querySelectorAll('.card');
-    
-    cards.forEach((card, index) => {
-        card.classList.remove('active', 'prev', 'next');
+class iOSApp {
+    constructor() {
+        this.currentCard = 0;
+        this.totalCards = 2;
+        this.cards = document.querySelectorAll('.card');
+        this.nextBtn = document.getElementById('nextBtn');
         
-        if (index === currentIndex) {
-            card.classList.add('active');
-        } else if (index === currentIndex - 1) {
-            card.classList.add('prev');
-        } else if (index === currentIndex + 1) {
-            card.classList.add('next');
-        }
-    });
-    
-    // Add haptic feedback for iOS
-    if (window.navigator && window.navigator.vibrate) {
-        window.navigator.vibrate(10);
+        this.init();
     }
-}
-
-function nextCard() {
-    if (currentIndex < totalCards - 1) {
-        currentIndex++;
-        updateCards();
+    
+    init() {
+        this.setupEventListeners();
+        this.updateCards();
+        this.updateTime();
+        setInterval(() => this.updateTime(), 1000);
+    }
+    
+    setupEventListeners() {
+        // Arrow button click
+        this.nextBtn.addEventListener('click', () => {
+            this.nextCard();
+            this.hapticFeedback();
+        });
         
-        // iOS haptic feedback
-        if (window.navigator && window.navigator.vibrate) {
-            window.navigator.vibrate(15);
-        }
-    }
-}
-
-function prevCard() {
-    if (currentIndex > 0) {
-        currentIndex--;
-        updateCards();
+        // Touch/swipe gestures
+        this.setupTouchGestures();
         
-        // iOS haptic feedback
-        if (window.navigator && window.navigator.vibrate) {
-            window.navigator.vibrate(15);
-        }
+        // Prevent context menu on long press
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
     }
-}
-
-// iOS-optimized touch event handlers
-const cardContainer = document.getElementById('iosCardContainer');
-
-// Touch events only (iOS optimized)
-cardContainer.addEventListener('touchstart', handleStart, { passive: false });
-cardContainer.addEventListener('touchmove', handleMove, { passive: false });
-cardContainer.addEventListener('touchend', handleEnd, { passive: false });
-cardContainer.addEventListener('touchcancel', handleEnd, { passive: false });
-
-function handleStart(e) {
-    isDragging = true;
-    startX = e.touches[0].clientX;
-    startTime = Date.now();
     
-    // Prevent scrolling
-    e.preventDefault();
-}
-
-function handleMove(e) {
-    if (!isDragging) return;
-    
-    e.preventDefault();
-    currentX = e.touches[0].clientX;
-    const diffX = currentX - startX;
-    
-    // Visual feedback during drag with iOS-style resistance
-    const activeCard = document.querySelector('.card.active');
-    if (activeCard) {
-        let translateX = diffX * 0.3;
+    setupTouchGestures() {
+        const container = document.querySelector('.card-container');
+        let startX = 0;
+        let startY = 0;
+        let currentX = 0;
+        let isDragging = false;
         
-        // Add resistance at boundaries (iOS-style)
-        if ((currentIndex === 0 && diffX > 0) || (currentIndex === totalCards - 1 && diffX < 0)) {
-            translateX = diffX * 0.1;
-        }
+        container.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isDragging = true;
+        }, { passive: true });
         
-        translateX = Math.max(-150, Math.min(150, translateX));
-        activeCard.style.transform = `scale(1) translateX(${translateX}px)`;
-        activeCard.style.transition = 'none';
-    }
-}
-
-function handleEnd(e) {
-    if (!isDragging) return;
-    
-    isDragging = false;
-    const diffX = currentX - startX;
-    const diffTime = Date.now() - startTime;
-    const velocity = Math.abs(diffX) / diffTime;
-    
-    // Reset transform with smooth animation
-    const activeCard = document.querySelector('.card.active');
-    if (activeCard) {
-        activeCard.style.transform = '';
-        activeCard.style.transition = '';
-    }
-    
-    // iOS-style swipe detection (considering velocity and distance)
-    const threshold = 50;
-    const velocityThreshold = 0.3;
-    
-    if (Math.abs(diffX) > threshold || velocity > velocityThreshold) {
-        if (diffX > 0 && currentIndex > 0) {
-            // Swipe right - go to previous card
-            prevCard();
-        } else if (diffX < 0 && currentIndex < totalCards - 1) {
-            // Swipe left - go to next card
-            nextCard();
-        }
-    }
-    
-    startX = 0;
-    currentX = 0;
-    startTime = 0;
-}
-
-// iOS-style button interactions
-document.querySelectorAll('.hotspot-item').forEach(item => {
-    item.addEventListener('touchstart', function(e) {
-        this.style.transform = 'scale(0.95)';
-        this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-    });
-    
-    item.addEventListener('touchend', function(e) {
-        this.style.transform = '';
-        this.style.backgroundColor = '';
+        container.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            
+            currentX = e.touches[0].clientX;
+            const deltaX = currentX - startX;
+            const deltaY = Math.abs(e.touches[0].clientY - startY);
+            
+            // Only handle horizontal swipes
+            if (deltaY < 50) {
+                e.preventDefault();
+            }
+        }, { passive: false });
         
-        // Add subtle haptic feedback
-        if (window.navigator && window.navigator.vibrate) {
-            window.navigator.vibrate(5);
-        }
-    });
-    
-    item.addEventListener('touchcancel', function(e) {
-        this.style.transform = '';
-        this.style.backgroundColor = '';
-    });
-});
-
-// iOS-style next button interaction
-document.querySelectorAll('.next-button').forEach(button => {
-    button.addEventListener('touchstart', function(e) {
-        this.style.transform = 'scale(0.95)';
-        this.style.backgroundColor = 'white';
-        this.style.color = 'black';
-    });
-    
-    button.addEventListener('touchend', function(e) {
-        this.style.transform = '';
-        this.style.backgroundColor = '';
-        this.style.color = '';
-    });
-    
-    button.addEventListener('touchcancel', function(e) {
-        this.style.transform = '';
-        this.style.backgroundColor = '';
-        this.style.color = '';
-    });
-});
-
-// Prevent default iOS behaviors
-document.addEventListener('touchmove', function(e) {
-    if (e.target.closest('.card-container')) {
-        e.preventDefault();
+        container.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            
+            const deltaX = currentX - startX;
+            const threshold = 50;
+            
+            if (Math.abs(deltaX) > threshold) {
+                if (deltaX < 0) {
+                    // Swipe left - next card
+                    this.nextCard();
+                } else {
+                    // Swipe right - previous card
+                    this.prevCard();
+                }
+                this.hapticFeedback();
+            }
+            
+            isDragging = false;
+        }, { passive: true });
     }
-}, { passive: false });
-
-// Prevent zoom on double tap
-let lastTouchEnd = 0;
-document.addEventListener('touchend', function(e) {
-    const now = (new Date()).getTime();
-    if (now - lastTouchEnd <= 300) {
-        e.preventDefault();
+    
+    nextCard() {
+        this.currentCard = (this.currentCard + 1) % this.totalCards;
+        this.updateCards();
     }
-    lastTouchEnd = now;
-}, false);
-
-// Handle orientation changes
-window.addEventListener('orientationchange', function() {
-    setTimeout(() => {
-        updateCards();
-    }, 100);
-});
-
-// Initialize with iOS-specific setup
-document.addEventListener('DOMContentLoaded', function() {
-    // Set viewport height for iOS
-    const setVH = () => {
-        const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
     
-    setVH();
-    window.addEventListener('resize', setVH);
-    window.addEventListener('orientationchange', () => {
-        setTimeout(setVH, 100);
-    });
+    prevCard() {
+        this.currentCard = (this.currentCard - 1 + this.totalCards) % this.totalCards;
+        this.updateCards();
+    }
     
-    // Initialize cards
-    updateCards();
+    updateCards() {
+        this.cards.forEach((card, index) => {
+            card.classList.remove('active', 'prev', 'next');
+            
+            if (index === this.currentCard) {
+                card.classList.add('active');
+            } else if (index === (this.currentCard - 1 + this.totalCards) % this.totalCards) {
+                card.classList.add('prev');
+            } else if (index === (this.currentCard + 1) % this.totalCards) {
+                card.classList.add('next');
+            }
+        });
+    }
     
-    // Update time in status bar
-    const updateTime = () => {
+    updateTime() {
         const now = new Date();
-        const timeString = now.toLocaleTimeString('en-US', { 
-            hour: 'numeric', 
+        const timeString = now.toLocaleTimeString('en-US', {
+            hour: 'numeric',
             minute: '2-digit',
-            hour12: false 
+            hour12: false
         });
         document.querySelector('.time').textContent = timeString;
-    };
+    }
     
-    updateTime();
-    setInterval(updateTime, 1000);
+    hapticFeedback() {
+        // iOS haptic feedback simulation
+        if (navigator.vibrate) {
+            navigator.vibrate(10);
+        }
+    }
+}
+
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new iOSApp();
+});
+
+// Handle orientation changes
+window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 100);
 });
